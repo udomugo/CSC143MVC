@@ -4,7 +4,7 @@ import java.util.List;
 public class DrawingModel {
 	
 	private List<Shape> shapes = new ArrayList<Shape>();
-	private Viewer viewer;
+	private ArrayList<Viewer> viewers = new ArrayList<Viewer>();
 	
 	/**
 	 * addViewer Method
@@ -14,9 +14,10 @@ public class DrawingModel {
 	 */
 	public void addViewer(Viewer v) {
 		// Adding a Viewer Object
-		this.viewer = v;
+		this.viewers.add(v);
 		// Calling the Viewer Object to update
-		viewer.update(this);
+		for (Viewer view : viewers)
+			view.update(this);
 	}
 	
 	/**
@@ -29,7 +30,8 @@ public class DrawingModel {
 		// Adding the Shape Object to the ArrayList
 		this.shapes.add(shape);
 		// Calling the Viewer Object to update
-		viewer.update(this);
+		for (Viewer view : viewers)
+			view.update(this);
 	}
 	
 	/**
