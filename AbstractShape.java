@@ -2,6 +2,7 @@ import java.awt.Color;
 
 public class AbstractShape {
 	
+	// fields of basic shape objects
 	protected Color c;
 	protected int x,y;
 	

@@ -4,6 +4,8 @@ import java.awt.Graphics;
 public class FibonacciSquare extends AbstractShape implements Shape{
 	
 	private int quadrant, n;
+	private final int NOFF = 1;
+	private final int NOFFLAST = 0; 
 	
 	/**
 	 * FibonacciSquare Constructor
@@ -65,5 +67,27 @@ public class FibonacciSquare extends AbstractShape implements Shape{
 	 */
 	public FibonacciSquare getDeepCopy() {
 		return new FibonacciSquare(this.x, this.y, this.c, this.quadrant, this.n);
+	}
+	
+	/**
+	 * getFibonaccieValue Method
+	 * Method calls overloaded method of getFibonacciValue with default parameters
+	 * @param n
+	 * @return
+	 */
+	public int getFibonacciValue(int n) {
+		return getFibonacciValue(n, NOFF, NOFFLAST);
+	}
+	
+	public int getFibonacciValue(int n, int nOfF, int nOfFLast) {
+		if (n == 1) {
+			return nOfF;
+		} else {
+		//if(n > 1) {
+			int temp = nOfF;
+			nOfF += nOfFLast;
+			nOfFLast = temp;
+		}
+		return getFibonacciValue(n-1, nOfF, nOfFLast);
 	}
 }
