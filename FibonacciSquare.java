@@ -1,11 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class FibonacciSquare extends AbstractShape implements Shape{
+public class FibonacciSquare extends AbstractShape{
 	
 	private int quadrant, n;
 	private final int NOFF = 1;
-	private final int NOFFLAST = 0; 
+	private final int NOFFLAST = 0;
 	
 	/**
 	 * FibonacciSquare Constructor
@@ -21,6 +21,7 @@ public class FibonacciSquare extends AbstractShape implements Shape{
 		super(x,y,c);
 		this.quadrant = quadrant;
 		this.n = n;
+		this.childrenShapes = new Shape[1];
 	}
 	
 	/**
@@ -65,9 +66,9 @@ public class FibonacciSquare extends AbstractShape implements Shape{
 	 * getDeepCopy Method
 	 * Method returns a Deep Copy of the FibonacciSquare Object.
 	 */
-	public FibonacciSquare getDeepCopy() {
-		return new FibonacciSquare(this.x, this.y, this.c, this.quadrant, this.n);
-	}
+//	public FibonacciSquare getDeepCopy() {
+//		return new FibonacciSquare(this.x, this.y, this.c, this.quadrant, this.n);
+//	}
 	
 	/**
 	 * getFibonaccieValue Method
@@ -79,15 +80,31 @@ public class FibonacciSquare extends AbstractShape implements Shape{
 		return getFibonacciValue(n, NOFF, NOFFLAST);
 	}
 	
+	/**
+	 * getFibonacciValue Method Overload
+	 * Method recursively calculates the Fibonacci Number to the value of n using the
+	 * constants NOFF and NOFFLAST as starting parameters.
+	 * @param n
+	 * @param nOfF
+	 * @param nOfFLast
+	 * @return
+	 */
 	public int getFibonacciValue(int n, int nOfF, int nOfFLast) {
 		if (n == 1) {
 			return nOfF;
 		} else {
-		//if(n > 1) {
 			int temp = nOfF;
 			nOfF += nOfFLast;
 			nOfFLast = temp;
 		}
 		return getFibonacciValue(n-1, nOfF, nOfFLast);
+	}
+	
+	/**
+	 * createChildren()
+	 */
+	public void createChildren() {
+		this.childrenShapes[0] = new FibonacciSquare( x, y, c, quadrant, n);
+		System.out.println("Created FibonacciSqaure Child");
 	}
 }
