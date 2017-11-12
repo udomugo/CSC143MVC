@@ -42,11 +42,17 @@ public class DrawingModel {
 	 */
 	public ArrayList<Shape> getShapes() {
 		
-		// Creating Deep Copy of the ArrayList of Shape Objects
-		ArrayList<Shape> deepCopy = new ArrayList<Shape>();
+		ArrayList<Shape> copy = new ArrayList<Shape>();
 		for (Shape s : shapes) {
-			deepCopy.add(s.getDeepCopy());
+			copy.add(s);
 		}
-		return deepCopy;
+		return copy;
+		
+		// Creating Deep Copy of the ArrayList of Shape Objects
+//		ArrayList<Shape> deepCopy = new ArrayList<Shape>();
+//		for (Shape s : shapes) {
+//			deepCopy.add(s.getDeepCopy());
+//		}
+//		return deepCopy;
 	}
 }

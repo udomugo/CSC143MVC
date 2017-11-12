@@ -71,11 +71,9 @@ public class MVCTestUnit {
 	@Test
 	public void testAddLevel() {
 		FibonacciSquare testShape1 = new FibonacciSquare(600, 50, Color.orange,1,60);
-		//System.out.println(testShape1);
 		assertTrue(!testShape1.hasChildren());
 		
 		HShape testShape2 = new HShape(50,50,Color.green,90);
-		//System.out.println(testShape2);
 		assertTrue(!testShape2.hasChildren());
 		
 		assertTrue(testShape1.addLevel());
@@ -83,9 +81,6 @@ public class MVCTestUnit {
 		
 		assertTrue(testShape2.addLevel());
 		assertTrue(testShape2.hasChildren());
-
-		//assertTrue(testShape1.hasChildren());
-		//assertTrue(testShape2.hasChildren());
 	}
 
 }
