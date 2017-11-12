@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class HShape extends AbstractShape implements Shape{
+public class HShape extends AbstractShape{
 	
 	private int size;
 	private final int SCALE = 30;
@@ -17,6 +17,7 @@ public class HShape extends AbstractShape implements Shape{
 	public HShape(int x, int y, Color c, int size) {
 		super(x,y,c);
 		this.size = size;
+		this.childrenShapes = new Shape[7];
 	}
 	
 	/**
@@ -43,7 +44,14 @@ public class HShape extends AbstractShape implements Shape{
 	 * getDeepCopy Method
 	 * Method returns a Deep Copy of the HShape Object.
 	 */
-	public HShape getDeepCopy() {
-		return new HShape(this.x, this.y, this.c, this.size);
+//	public HShape getDeepCopy() {
+//		return new HShape(this.x, this.y, this.c, this.size);
+//	}
+	
+	public void createChildren() {
+		for (int i = 0; i < childrenShapes.length; i++) {
+			childrenShapes[i] = new HShape( x, y, c, size);
+			System.out.println("Created HShape Child #" + i);
+		}
 	}
 }
