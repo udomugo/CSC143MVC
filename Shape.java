@@ -17,6 +17,21 @@ public interface Shape {
 	 * Method returns a Deep Copy of the Shape Object
 	 * @return
 	 */
-	Shape getDeepCopy();
+	//Shape getDeepCopy();
+	
+	/**
+	 * toString Method
+	 * returns the dynamic class type of the Shape Object
+	 * @return
+	 */
+	String toString();
+	
+	boolean removeLevel();
+	
+	boolean addLevel();
+	
+	void createChildren();
+	
+	boolean hasChildren();
 	
 }
