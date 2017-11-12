@@ -104,7 +104,8 @@ public class FibonacciSquare extends AbstractShape{
 	 * createChildren()
 	 */
 	public void createChildren() {
-		this.childrenShapes[0] = new FibonacciSquare( x, y, c, quadrant, n);
+		
+		this.childrenShapes[0] = new FibonacciSquare( x + 100, y, c, quadrant, n);
 		System.out.println("Created FibonacciSqaure Child");
 	}
 }

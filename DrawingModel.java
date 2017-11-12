@@ -55,4 +55,13 @@ public class DrawingModel {
 //		}
 //		return deepCopy;
 	}
+	
+	public void addLevel() {
+		for (Shape s : shapes) {
+			s.addLevel();
+		}
+		for (Viewer view : viewers) {
+			view.update(this);
+		}
+	}
 }
