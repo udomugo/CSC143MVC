@@ -64,4 +64,13 @@ public class DrawingModel {
 			view.update(this);
 		}
 	}
+	
+	public void removeLevel() {
+		for (Shape s : shapes) {
+			s.removeLevel();
+		}
+		for (Viewer view : viewers) {
+			view.update(this);
+		}
+	}
 }
