@@ -12,6 +12,8 @@ public interface Shape {
 	 */
 	void drawShape(Graphics g, Color c);
 	
+	void draw(Graphics g, Color c);
+	
 	/**
 	 * getDeepCopy Method
 	 * Method returns a Deep Copy of the Shape Object
@@ -30,7 +32,7 @@ public interface Shape {
 	
 	boolean addLevel();
 	
-	void createChildren();
+	boolean createChildren();
 	
 	boolean hasChildren();
 	
