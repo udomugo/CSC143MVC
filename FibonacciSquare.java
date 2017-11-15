@@ -1,11 +1,13 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class FibonacciSquare extends AbstractShape{
 	
 	private int quadrant, n;
 	private final int NOFF = 1;
 	private final int NOFFLAST = 0;
+	private final int SIZE = 15;
 	
 	/**
 	 * FibonacciSquare Constructor
@@ -31,32 +33,85 @@ public class FibonacciSquare extends AbstractShape{
 	 * respect to the Cartesian quadrant of the FibonacciSquare Object.
 	 * 
 	 */
-	public void drawShape(Graphics g, Color bgColor) {
+//	public void draw(Graphics g, Color bgColor) {
+//		int size = SIZE * getFibonacciValue();
+//		// Setting the color of the FibonacciSquare Object
+//		g.setColor(c);
+//		// Drawing the Box of the FibonacciSquare with the given (x, y) coordinates 
+//		//		being in the the upper left corner of the FibonacciSquare when drawn
+//		g.drawLine(this.x, this.y, this.x + size, this.y);
+//		g.drawLine(this.x + size, this.y, this.x + size, this.y + size);
+//		g.drawLine(this.x, this.y + size, this.x + size, this.y + size);
+//		g.drawLine(this.x, this.y, this.x, this.y + size);
+//		
+//		// Drawing the arc of the FibonacciSquare Object based on Cartesian quadrant
+//		switch (this.quadrant){
+//			case 1: {
+//				g.drawArc(this.x - size, this.y, 2*size, 2*size, 0, 90);
+//				break;
+//			}
+//			case 2: {
+//				g.drawArc(this.x, this.y, 2*size, 2*size, 90, 90);
+//				break;
+//			}
+//			case 3: {
+//				g.drawArc(this.x, this.y - size, 2*size, 2*size, 180, 90);
+//				break;
+//			}
+//			case 4: {
+//				g.drawArc(this.x - size, this.y - size, 2*size, 2*size, 270, 90);
+//				break;
+//			}
+//		}
+//	}
+	
+	public void draw(Graphics g, Color bgColor) {
+		int size = SIZE * getFibonacciValue();
 		// Setting the color of the FibonacciSquare Object
+		g.setColor(Color.blue);
+		//g.drawLine(this.x, this.y, this.x + 3, this.y + 3);
+		g.drawRect(this.x - 3, this.y - 3, 7, 7);
 		g.setColor(c);
 		// Drawing the Box of the FibonacciSquare with the given (x, y) coordinates 
 		//		being in the the upper left corner of the FibonacciSquare when drawn
-		g.drawLine(this.x, this.y, this.x + this.n, this.y);
-		g.drawLine(this.x + this.n, this.y, this.x + this.n, this.y + this.n);
-		g.drawLine(this.x, this.y + this.n, this.x + this.n, this.y + this.n);
-		g.drawLine(this.x, this.y, this.x, this.y + this.n);
+//		g.drawLine(this.x, this.y, this.x + size, this.y);
+//		g.drawLine(this.x + size, this.y, this.x + size, this.y + size);
+//		g.drawLine(this.x, this.y + size, this.x + size, this.y + size);
+//		g.drawLine(this.x, this.y, this.x, this.y + size);
+		//g.drawLine(this.x, this.y, this.x + 1, this.y + 1);
 		
 		// Drawing the arc of the FibonacciSquare Object based on Cartesian quadrant
 		switch (this.quadrant){
 			case 1: {
-				g.drawArc(this.x - this.n, this.y, 2*n, 2*n, 0, 90);
+				g.drawLine(this.x, this.y, this.x - size, this.y);
+				g.drawLine(this.x - size, this.y, this.x - size, this.y - size);
+				g.drawLine(this.x - size, this.y - size, this.x, this.y - size);
+				g.drawLine(this.x, this.y, this.x, this.y - size);
+				g.drawArc(this.x - 2*size, this.y - size, 2*size, 2*size, 0, 90);
 				break;
 			}
 			case 2: {
-				g.drawArc(this.x, this.y, 2*n, 2*n, 90, 90);
+				g.drawLine(this.x, this.y, this.x - size, this.y);
+				g.drawLine(this.x - size, this.y, this.x - size, this.y + size);
+				g.drawLine(this.x - size, this.y + size, this.x, this.y + size);
+				g.drawLine(this.x, this.y, this.x, this.y + size);
+				g.drawArc(this.x - size, this.y, 2*size, 2*size, 90, 90);
 				break;
 			}
 			case 3: {
-				g.drawArc(this.x, this.y - this.n, 2*n, 2*n, 180, 90);
+				g.drawLine(this.x, this.y, this.x + size, this.y);
+				g.drawLine(this.x + size, this.y, this.x + size, this.y + size);
+				g.drawLine(this.x, this.y + size, this.x + size, this.y + size);
+				g.drawLine(this.x, this.y, this.x, this.y + size);
+				g.drawArc(this.x, this.y - size, 2*size, 2*size, 180, 90);
 				break;
 			}
 			case 4: {
-				g.drawArc(this.x - this.n, this.y - this.n, 2*n, 2*n, 270, 90);
+				g.drawLine(this.x, this.y, this.x + size, this.y);
+				g.drawLine(this.x + size, this.y, this.x + size, this.y - size);
+				g.drawLine(this.x + size, this.y - size, this.x, this.y - size);
+				g.drawLine(this.x, this.y, this.x, this.y - size);
+				g.drawArc(this.x - size, this.y - 2*size, 2*size, 2*size, 270, 90);
 				break;
 			}
 		}
@@ -69,6 +124,16 @@ public class FibonacciSquare extends AbstractShape{
 //	public FibonacciSquare getDeepCopy() {
 //		return new FibonacciSquare(this.x, this.y, this.c, this.quadrant, this.n);
 //	}
+	
+	/**
+	 * getFibonaccieValue Method
+	 * Method calls overloaded method of getFibonacciValue with no parameters
+	 * @param n
+	 * @return
+	 */
+	public int getFibonacciValue() {
+		return getFibonacciValue(this.n);
+	}
 	
 	/**
 	 * getFibonaccieValue Method
@@ -90,6 +155,9 @@ public class FibonacciSquare extends AbstractShape{
 	 * @return
 	 */
 	public int getFibonacciValue(int n, int nOfF, int nOfFLast) {
+		if (n == 0) {
+			return 0;
+		}
 		if (n == 1) {
 			return nOfF;
 		} else {
@@ -103,9 +171,54 @@ public class FibonacciSquare extends AbstractShape{
 	/**
 	 * createChildren()
 	 */
-	public void createChildren() {
-		
-		this.childrenShapes[0] = new FibonacciSquare( x + 100, y, c, quadrant, n);
+	public boolean createChildren() {
+		//int nextN = n * getFibonacciValue();
+		int nextQ = getQuadrant(this.quadrant);
+		Point p = getCoordinates(nextQ);
+		this.childrenShapes[0] = new FibonacciSquare( (int)p.getX(), (int)p.getY(), c, nextQ, n + 1);
 		System.out.println("Created FibonacciSqaure Child");
+		return true;
+	}
+	
+	private int getQuadrant(int quadrant) {
+		if ( quadrant == 4) {
+			quadrant = 1;
+		} else {
+			quadrant++;
+		}
+		return quadrant;
+	}
+	
+	private Point getCoordinates(int nextQ) {
+		Point p = new Point();
+		int xNext = 0;
+		int yNext = 0;
+		int size = SIZE * getFibonacciValue(n);
+//		int xSize = SIZE * getFibonacciValue(n);
+//		int ySize = SIZE 
+		switch(nextQ) {
+			case 1: {
+				xNext = this.x + size;
+				yNext = this.y - size;
+				break;
+			}
+			case 2: {
+				xNext = this.x - size;
+				yNext = this.y - size;
+				break;
+			}
+			case 3: {
+				xNext = this.x - size;
+				yNext = this.y + size;
+				break;
+			}
+			case 4: {
+				xNext = this.x + size;
+				yNext = this.y + size;
+				break;
+			}
+		}
+		p.setLocation(xNext, yNext);
+		return p;
 	}
 }
