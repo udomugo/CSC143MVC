@@ -24,6 +24,14 @@ public class AbstractShape implements Shape{
 	@Override
 	public void drawShape(Graphics g, Color c) {
 		// TODO Auto-generated method stub
+		this.draw(g, c);
+		if (this.hasChildren()) {
+			for (Shape s : childrenShapes) {
+				s.drawShape(g, c);
+				
+			}
+		} else {
+		}
 		
 	}
 	
@@ -36,23 +44,26 @@ public class AbstractShape implements Shape{
 			this.createChildren();
 		} else {
 			for (Shape s : childrenShapes) {
-				if (s.hasChildren()) //{
+				if (s.hasChildren()) {
 					s.addLevel();
-//				} else {
-//					this.createChildren();
-//				}
+				} else {
+					s.createChildren();
+				}
 			}
 		}
 		return this.hasChildren();
 	}
 	
 	public boolean removeLevel() {
-		if (this.hasChildren()) {
-			for (Shape s : childrenShapes) {
-				s.removeLevel();
+		boolean isParent = this.hasChildren();
+		if (isParent) {
+			for (int i = 0; i < childrenShapes.length; i++) {
+				if (childrenShapes[i].removeLevel()) {
+					childrenShapes[i] = null;
+				}
 			}
 		}
-		return this.hasChildren();
+		return !isParent;
 	}
 	
 	public boolean hasChildren() {
@@ -65,8 +76,14 @@ public class AbstractShape implements Shape{
 		return children;
 	}
 	
-	public void createChildren() {
-		this.createChildren();
+	public boolean createChildren() {
+		return this.createChildren();
+	}
+
+	@Override
+	public void draw(Graphics g, Color c) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
