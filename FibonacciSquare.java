@@ -8,6 +8,8 @@ public class FibonacciSquare extends AbstractShape{
 	private final int NOFF = 1;
 	private final int NOFFLAST = 0;
 	private final int SIZE = 15;
+	private int nextX;
+	private int nextY;
 	
 	/**
 	 * FibonacciSquare Constructor
@@ -24,6 +26,7 @@ public class FibonacciSquare extends AbstractShape{
 		this.quadrant = quadrant;
 		this.n = n;
 		this.childrenShapes = new Shape[1];
+		this.getNextCoord();
 	}
 	
 	/**
@@ -173,14 +176,15 @@ public class FibonacciSquare extends AbstractShape{
 	 */
 	public boolean createChildren() {
 		//int nextN = n * getFibonacciValue();
-		int nextQ = getQuadrant(this.quadrant);
-		Point p = getCoordinates(nextQ);
-		this.childrenShapes[0] = new FibonacciSquare( (int)p.getX(), (int)p.getY(), c, nextQ, n + 1);
+		int nextQ = getNextQuadrant(this.quadrant);
+		//Point p = getCoordinates(nextQ);
+		//this.childrenShapes[0] = new FibonacciSquare( (int)p.getX(), (int)p.getY(), c, nextQ, n + 1);
+		this.childrenShapes[0] = new FibonacciSquare( this.nextX, this.nextY, c, nextQ, n + 1);
 		System.out.println("Created FibonacciSqaure Child");
 		return true;
 	}
 	
-	private int getQuadrant(int quadrant) {
+	private int getNextQuadrant(int quadrant) {
 		if ( quadrant == 4) {
 			quadrant = 1;
 		} else {
@@ -189,36 +193,141 @@ public class FibonacciSquare extends AbstractShape{
 		return quadrant;
 	}
 	
-	private Point getCoordinates(int nextQ) {
-		Point p = new Point();
-		int xNext = 0;
-		int yNext = 0;
+//	private Point getCoordinates(int nextQ) {
+//		Point p = new Point();
+//		int xNext = 0;
+//		int yNext = 0;
+//		int size = SIZE * getFibonacciValue(n);
+//		switch(nextQ) {
+//			case 1: {
+//				xNext = this.x + size;
+//				yNext = this.y - size;
+//				break;
+//			}
+//			case 2: {
+//				xNext = this.x - size;
+//				yNext = this.y - size;
+//				break;
+//			}
+//			case 3: {
+//				xNext = this.x - size;
+//				yNext = this.y + size;
+//				break;
+//			}
+//			case 4: {
+//				xNext = this.x + size;
+//				yNext = this.y + size;
+//				break;
+//			}
+//		}
+//		nextX = xNext;
+//		nextY = yNext;
+//		p.setLocation(xNext, yNext);
+//		return p;
+//	}
+	
+	private void getNextCoord() {
+		//Point p = new Point();
+		//int xNext = 0;
+		//int yNext = 0;
 		int size = SIZE * getFibonacciValue(n);
-//		int xSize = SIZE * getFibonacciValue(n);
-//		int ySize = SIZE 
-		switch(nextQ) {
+		switch(this.getNextQuadrant(this.quadrant)) {
 			case 1: {
-				xNext = this.x + size;
-				yNext = this.y - size;
+				this.nextX = this.x + size;
+				this.nextY = this.y - size;
 				break;
 			}
 			case 2: {
-				xNext = this.x - size;
-				yNext = this.y - size;
+				this.nextX = this.x - size;
+				this.nextY = this.y - size;
 				break;
 			}
 			case 3: {
-				xNext = this.x - size;
-				yNext = this.y + size;
+				this.nextX = this.x - size;
+				this.nextY = this.y + size;
 				break;
 			}
 			case 4: {
-				xNext = this.x + size;
-				yNext = this.y + size;
+				this.nextX = this.x + size;
+				this.nextY = this.y + size;
 				break;
 			}
 		}
-		p.setLocation(xNext, yNext);
-		return p;
+		//nextX = xNext;
+		//nextY = yNext;
+		//p.setLocation(xNext, yNext);
+		//return p;
+	}
+	
+	public boolean checkCoord(int xCheck, int yCheck) {
+		boolean result = false;
+		
+		switch(this.quadrant) {
+		
+		case 1: {
+			if (xCheck > this.nextX && xCheck < this.x) {
+				result = true;
+			} else {
+				result = false;
+			}
+			if (yCheck < this.nextY && yCheck > this.y) {
+				result = true;
+			} else {
+				result = false;
+			}
+			return result;
+		}
+		case 2: {
+			if (xCheck > this.nextX && xCheck < this.x) {
+				result = true;
+			} else {
+				result = false;
+			}
+			if (yCheck < this.nextY && yCheck > this.y) {
+				result = true;
+			} else {
+				result = false;
+			}
+			return result;
+		}
+		case 3: {
+			if (xCheck < this.nextX && xCheck > this.x) {
+				result = true;
+			} else {
+				result = false;
+			}
+			if (yCheck < this.nextY && yCheck > this.y) {
+				result = true;
+			} else {
+				result = false;
+			}
+			return result;
+		}
+		case 4: {
+			if (xCheck < this.nextX && xCheck > this.x) {
+				result = true;
+			} else {
+				result = false;
+			}
+			if (yCheck < this.nextY && yCheck > this.y) {
+				result = true;
+			} else {
+				result = false;
+			}
+			return result;
+		}
+		}
+		
+//		if ((Math.abs(this.x - nextX) > Math.abs(this.x - xCheck)) || (Math.abs(this.x - nextX) > Math.abs(this.nextX - xCheck))) {
+//			result = true;
+//		} else {
+//			result = false;
+//		}
+//		if ((Math.abs(this.y - nextY) > Math.abs(this.y - yCheck)) || (Math.abs(this.y - nextY) > Math.abs(this.nextY - yCheck))) {
+//			result = true;
+//		} else {
+//			result = false;
+//		}
+		return result;
 	}
 }
