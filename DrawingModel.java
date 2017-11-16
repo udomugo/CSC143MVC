@@ -56,10 +56,17 @@ public class DrawingModel {
 //		return deepCopy;
 	}
 	
-	public void addLevel() {
-		for (Shape s : shapes) {
-			s.addLevel();
-		}
+//	public void addLevel() {
+//		for (Shape s : shapes) {
+//			s.addLevel();
+//		}
+//		for (Viewer view : viewers) {
+//			view.update(this);
+//		}
+//	}
+	
+	public void addLevel(Shape s) {
+		s.addLevel();
 		for (Viewer view : viewers) {
 			view.update(this);
 		}
@@ -73,4 +80,22 @@ public class DrawingModel {
 			view.update(this);
 		}
 	}
+	
+	public void resetShapes() {
+		for (Shape s : shapes) {
+			s.reset();
+		}
+		for (Viewer view : viewers) {
+			view.update(this);
+		}
+	}
+	
+//	public boolean checkClick(int xCheck, int yCheck) {
+//		for (Shape s : shapes) {
+//			s.checkClick(xCheck, yCheck);
+//		}
+//		for (Viewer view : viewers) {
+//			view.update(this);
+//		}
+//	}
 }
