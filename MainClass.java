@@ -1,13 +1,15 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Rectangle;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 public class MainClass {
-	
 	/**
 	 * MainClass Method
 	 * Creates the top level JFrame Object, creates the Viewer, DrawingModel, and Shape Class Objects.
@@ -18,18 +20,42 @@ public class MainClass {
 		JFrame frame = new JFrame("Fibonacci^2");
 		
 		// Setting JFrame Object width and height
-		frame.setSize(1000, 800);
+		frame.setSize(1440, 900);
 		
 		// Terminates process when window is closed
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 		// Adding a button to add a level of recursion
-		JButton button = new JButton ("Add Level");
+		JButton buttonAdd = new JButton ("Add Level");
 		JPanel southPanel = new JPanel();
 		southPanel.setBackground(Color.darkGray);
-		southPanel.add(button);
+		southPanel.add(buttonAdd);
 		frame.add(southPanel, BorderLayout.SOUTH);
+		
+		// Adding a button to remove a level of recursion
+		JButton buttonRemove = new JButton ("Remove Level");
+		southPanel.add(buttonRemove);
+		
+		// Adding a button to reset shapes displayed
+		JButton buttonReset = new JButton ("Reset Shapes");
+		southPanel.add(buttonReset);
+		
+		// Adding a button to reset shapes displayed
+		JRadioButton radioAddLevel = new JRadioButton("Add Level");
+		southPanel.add(radioAddLevel);
+		
+		JRadioButton radioRemoveLevel = new JRadioButton("Remove Level");
+		southPanel.add(radioRemoveLevel);
+		
+		// Adding radio buttons to a button group
+		ButtonGroup radioGroup = new ButtonGroup();
+		radioGroup.add(radioAddLevel);
+		radioGroup.add(radioRemoveLevel);
+		//southPanel.add(level);
+		
+		//Rectangle testRec = new Rectangle(50,350,270,270);
+		
 		
 		// Adding a viewer object to the frame
 		Viewer v = new Viewer();
@@ -43,8 +69,7 @@ public class MainClass {
 		
 		// Adding the DrawingModel and Viewer Objects to the Controller Object
 		Controller controller = new Controller(model, v);
-		
-		
+		//ControllerRemove actionRemove = new ControllerRemove(model, v);
 		
 		// Adding HShape Objects of varying sizes
 		//model.addShape(new HShape(50,50,Color.green,90));
@@ -52,13 +77,16 @@ public class MainClass {
 		model.addShape(new HShape(50,350,Color.green,270));
 		
 		// Adding FibonacciSquare Objects of varying sizes and arc quadrants
-		model.addShape(new FibonacciSquare(600, 50, Color.orange,1,60));
+		model.addShape(new FibonacciSquare(600, 200, Color.orange,1,1));
 		//model.addShape(new FibonacciSquare(400, 50, Color.orange,2,30));
 		//model.addShape(new FibonacciSquare(400, 250, Color.orange,3,120));
-		//model.addShape(new FibonacciSquare(600, 250, Color.orange,4,240));
+		model.addShape(new FibonacciSquare(600, 600, Color.orange,4,1));
 		
 		// ActionListener for the Add Level button
-		button.addActionListener(controller);
+		buttonAdd.addActionListener(controller);
+		buttonRemove.addActionListener(controller);
+		buttonReset.addActionListener(controller);
+		frame.addMouseListener(controller);
 		
 		// Setting JFrame Object to visible
 		frame.setVisible(true);
