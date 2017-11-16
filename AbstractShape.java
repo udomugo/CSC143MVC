@@ -28,11 +28,8 @@ public class AbstractShape implements Shape{
 		if (this.hasChildren()) {
 			for (Shape s : childrenShapes) {
 				s.drawShape(g, c);
-				
 			}
-		} else {
-		}
-		
+		} 
 	}
 	
 	public String toString() {
@@ -80,10 +77,34 @@ public class AbstractShape implements Shape{
 		return this.createChildren();
 	}
 
+	public boolean reset() {
+		for (int i = 0; i< childrenShapes.length; i++) {
+			childrenShapes[i] = null;
+		}
+		return true;
+	}
+
 	@Override
 	public void draw(Graphics g, Color c) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	public boolean checkClick(int xCheck, int yCheck) {
+		boolean result = false;
+		if (!this.hasChildren()) {
+			result = this.checkCoord(xCheck, yCheck);
+		} else {
+			for (Shape s : childrenShapes) {
+				result = s.checkCoord(xCheck, yCheck);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean checkCoord(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
