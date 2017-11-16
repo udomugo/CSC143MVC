@@ -1,8 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class HShape extends AbstractShape{
 	
+	private static int smallestSize;
 	private int size;
 	private final int SCALE = 30;
 	
@@ -17,6 +19,7 @@ public class HShape extends AbstractShape{
 	public HShape(int x, int y, Color c, int size) {
 		super(x,y,c);
 		this.size = size;
+		smallestSize = size;
 		this.childrenShapes = new Shape[7];
 	}
 	
@@ -27,7 +30,7 @@ public class HShape extends AbstractShape{
 	 * commands to draw the HShape Object on the Graphics Object.
 	 * 
 	 */
-	public void drawShape(Graphics g, Color bgColor) {
+	public void draw(Graphics g, Color bgColor) {
 		// Setting the color of the HShape Object
 		g.setColor(c);
 		// Filling Square using the (x,y) coordinates and the length of the size value
@@ -48,10 +51,72 @@ public class HShape extends AbstractShape{
 //		return new HShape(this.x, this.y, this.c, this.size);
 //	}
 	
-	public void createChildren() {
-		for (int i = 0; i < childrenShapes.length; i++) {
-			childrenShapes[i] = new HShape( x, y, c, size);
-			System.out.println("Created HShape Child #" + i);
+	public boolean addLevel() {
+		boolean result = false;
+		if (smallestSize <= 3){
+			System.out.println("Level not added. They would be so tiny!");
+		} else {
+			result = super.addLevel();
 		}
+		return result;
+	}
+	
+	public boolean createChildren() {
+		boolean result = false;
+		if (smallestSize <= 3){
+			System.out.println("Children Not Created. They would be so tiny!");
+		} else {
+			for (int i = 0; i < childrenShapes.length; i++) {
+				Point p = getCoordinates(i);
+				childrenShapes[i] = new HShape( (int)p.getX(), (int)p.getY(), c, size/3);
+				System.out.println("Created HShape Child #" + i);
+			}
+		}
+		return result;
+	}
+	
+	private Point getCoordinates(int i) {
+		Point p = new Point();
+		int xNext = 0;
+		int yNext = 0;
+		switch(i) {
+			case 0: {
+				xNext = this.x;
+				yNext =this.y;
+				break;
+			}
+			case 1: {
+				xNext = this.x;
+				yNext =this.y + this.size/3;
+				break;
+			}
+			case 2: {
+				xNext = this.x;
+				yNext =this.y + 2*(this.size/3);
+				break;
+			}
+			case 3: {
+				xNext = this.x + this.size/3;
+				yNext =this.y + this.size/3;
+				break;
+			}
+			case 4: {
+				xNext = this.x + 2*(this.size/3);
+				yNext =this.y;
+				break;
+			}
+			case 5: {
+				xNext = this.x + 2*(this.size/3);
+				yNext =this.y + this.size/3;
+				break;
+			}
+			case 6: {
+				xNext = this.x + 2*(this.size/3);
+				yNext =this.y + 2*(this.size/3);
+				break;
+			}
+		}
+		p.setLocation(xNext, yNext);
+		return p;
 	}
 }
