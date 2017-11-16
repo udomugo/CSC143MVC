@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public interface Shape {
+public interface Shape{
 	
 	/**
 	 * drawShape Method
@@ -35,5 +35,11 @@ public interface Shape {
 	boolean createChildren();
 	
 	boolean hasChildren();
+	
+	boolean reset();
+	
+	boolean checkClick(int x, int y);
+	
+	boolean checkCoord(int x, int y);
 	
 }
