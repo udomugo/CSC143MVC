@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 public class Viewer extends JPanel implements View{
 	
 	private DrawingModel model;
+	//private ArrayList<Rectangle> clickArea;
 	
 	/**
 	 * Viewer Constructor

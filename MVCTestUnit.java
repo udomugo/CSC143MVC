@@ -23,9 +23,13 @@ public class MVCTestUnit {
 		System.out.println(testResult1);
 		assertTrue(testResult1 == 8);
 		
-		int testResult2 = testShape.getFibonacciValue(20);
+		int testResult2 = testShape.getFibonacciValue(2);
 		System.out.println(testResult2);
-		assertTrue(testResult2 == 6765);
+		assertTrue(testResult2 == 1);
+		
+		int testResult3 = testShape.getFibonacciValue(0);
+		System.out.println(testResult3);
+		assertTrue(testResult3 == 0);
 	}
 	
 	@Test
