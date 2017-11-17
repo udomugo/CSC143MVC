@@ -40,9 +40,9 @@ public class DrawingModel {
 	 * Shape Objects of the model.
 	 * @return
 	 */
-	public ArrayList<Shape> getShapes() {
-		
-		ArrayList<Shape> copy = new ArrayList<Shape>();
+	public List<Shape> getShapes() {
+		//return this.shapes;
+		List<Shape> copy = new ArrayList<Shape>();
 		for (Shape s : shapes) {
 			copy.add(s);
 		}
@@ -66,16 +66,14 @@ public class DrawingModel {
 //	}
 	
 	public void addLevel(Shape s) {
-		s.addLevel();
+		s.addLevel(viewers.get(0).getWidth(), viewers.get(0).getHeight());
 		for (Viewer view : viewers) {
 			view.update(this);
 		}
 	}
 	
-	public void removeLevel() {
-		for (Shape s : shapes) {
-			s.removeLevel();
-		}
+	public void removeLevel(Shape s) {
+		s.removeLevel();
 		for (Viewer view : viewers) {
 			view.update(this);
 		}
