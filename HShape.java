@@ -32,7 +32,7 @@ public class HShape extends AbstractShape{
 	 * commands to draw the HShape Object on the Graphics Object.
 	 * 
 	 */
-	public void draw(Graphics g, Color bgColor, int width, int height) {
+	public void draw(Graphics g, Color bgColor) {
 		// Setting the color of the HShape Object
 		g.setColor(c);
 		// Filling Square using the (x,y) coordinates and the length of the size value

@@ -71,7 +71,7 @@ public class FibonacciSquare extends AbstractShape{
 //		}
 //	}
 	
-	public void draw(Graphics g, Color bgColor, int width, int height) {
+	public void draw(Graphics g, Color bgColor) {
 		//if ( (width == 0 && height == 0) || (!(this.nextX < 0 || this.nextX > width) && !(this.nextY < 0 || this.nextY > height)) ) {
 			int size = SIZE * getFibonacciValue();
 			// Setting the color of the FibonacciSquare Object

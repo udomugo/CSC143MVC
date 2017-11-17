@@ -27,18 +27,18 @@ public class AbstractShape implements Shape{
 	}
 
 	@Override
-	public void draw(Graphics g, Color c, int width, int height) {
+	public void draw(Graphics g, Color c) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void drawShape(Graphics g, Color c, int width, int height) {
+	public void drawShape(Graphics g, Color c) {
 		// TODO Auto-generated method stub
-		this.draw(g, c, width, height);
+		this.draw(g, c);
 		if (this.hasChildren()) {
 			for (Shape s : childrenShapes) {
-				s.drawShape(g, c, width, height);
+				s.drawShape(g, c);
 			}
 		} 
 	}
