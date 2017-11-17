@@ -15,13 +15,6 @@ public interface Shape{
 	void draw(Graphics g, Color c);
 	
 	/**
-	 * getDeepCopy Method
-	 * Method returns a Deep Copy of the Shape Object
-	 * @return
-	 */
-	//Shape getDeepCopy();
-	
-	/**
 	 * toString Method
 	 * returns the dynamic class type of the Shape Object
 	 * @return
@@ -30,16 +23,16 @@ public interface Shape{
 	
 	boolean removeLevel();
 	
-	boolean addLevel();
+	boolean addLevel(int width, int height);
 	
-	boolean createChildren();
+	boolean createChildren(int width, int height);
 	
 	boolean hasChildren();
 	
 	boolean reset();
 	
-	boolean checkClick(int x, int y);
+	boolean checkClick(int xCheck, int yCheck);
 	
-	boolean checkCoord(int x, int y);
+	boolean checkCoord(int xCheck, int yCheck);
 	
 }

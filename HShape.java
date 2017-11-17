@@ -6,7 +6,7 @@ public class HShape extends AbstractShape{
 	
 	private static int smallestSize;
 	private int size;
-	private final int SCALE = 30;
+	//private final int SCALE = 30;
 	
 	/**
 	 * HShape Constructor
@@ -21,6 +21,8 @@ public class HShape extends AbstractShape{
 		this.size = size;
 		smallestSize = size;
 		this.childrenShapes = new Shape[7];
+		this.nextX = this.x + size;
+		this.nextY = this.y + size;
 	}
 	
 	/**
@@ -30,7 +32,7 @@ public class HShape extends AbstractShape{
 	 * commands to draw the HShape Object on the Graphics Object.
 	 * 
 	 */
-	public void draw(Graphics g, Color bgColor) {
+	public void draw(Graphics g, Color bgColor, int width, int height) {
 		// Setting the color of the HShape Object
 		g.setColor(c);
 		// Filling Square using the (x,y) coordinates and the length of the size value
@@ -43,25 +45,17 @@ public class HShape extends AbstractShape{
 		g.fillRect(x + size/3, y + 2*(size/3), size/3, size/3);
 	}
 	
-	/**
-	 * getDeepCopy Method
-	 * Method returns a Deep Copy of the HShape Object.
-	 */
-//	public HShape getDeepCopy() {
-//		return new HShape(this.x, this.y, this.c, this.size);
-//	}
-	
-	public boolean addLevel() {
+	public boolean addLevel(int width, int height) {
 		boolean result = false;
 		if (smallestSize <= 3){
 			System.out.println("Level not added. They would be so tiny!");
 		} else {
-			result = super.addLevel();
+			result = super.addLevel(width, height);
 		}
 		return result;
 	}
 	
-	public boolean createChildren() {
+	public boolean createChildren(int width, int height) {
 		boolean result = false;
 		if (smallestSize <= 3){
 			System.out.println("Children Not Created. They would be so tiny!");
@@ -118,5 +112,9 @@ public class HShape extends AbstractShape{
 		}
 		p.setLocation(xNext, yNext);
 		return p;
+	}
+	
+	public boolean checkClick(int xCheck, int yCheck) {
+		return this.checkCoord(xCheck, yCheck);
 	}
 }

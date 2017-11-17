@@ -20,32 +20,28 @@ public class MainClass {
 		JFrame frame = new JFrame("Fibonacci^2");
 		
 		// Setting JFrame Object width and height
-		frame.setSize(1440, 900);
+		frame.setSize(1440, 1000);
 		
 		// Terminates process when window is closed
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		// Adding a button to add a level of recursion
-		JButton buttonAdd = new JButton ("Add Level");
+		// Adding south panel
 		JPanel southPanel = new JPanel();
 		southPanel.setBackground(Color.darkGray);
-		southPanel.add(buttonAdd);
 		frame.add(southPanel, BorderLayout.SOUTH);
-		
-		// Adding a button to remove a level of recursion
-		JButton buttonRemove = new JButton ("Remove Level");
-		southPanel.add(buttonRemove);
 		
 		// Adding a button to reset shapes displayed
 		JButton buttonReset = new JButton ("Reset Shapes");
 		southPanel.add(buttonReset);
 		
 		// Adding a button to reset shapes displayed
-		JRadioButton radioAddLevel = new JRadioButton("Add Level");
+		JRadioButton radioAddLevel = new JRadioButton("Add Level", true);
+		radioAddLevel.setActionCommand("RadioAddLevel");
 		southPanel.add(radioAddLevel);
 		
 		JRadioButton radioRemoveLevel = new JRadioButton("Remove Level");
+		radioRemoveLevel.setActionCommand("RadioRemoveLevel");
 		southPanel.add(radioRemoveLevel);
 		
 		// Adding radio buttons to a button group
@@ -74,19 +70,21 @@ public class MainClass {
 		// Adding HShape Objects of varying sizes
 		//model.addShape(new HShape(50,50,Color.green,90));
 		//model.addShape(new HShape(50,150,Color.green,180));
-		model.addShape(new HShape(50,350,Color.green,270));
+		model.addShape(new HShape(50,225,Color.green,360));
 		
 		// Adding FibonacciSquare Objects of varying sizes and arc quadrants
-		model.addShape(new FibonacciSquare(600, 200, Color.orange,1,1));
+		model.addShape(new FibonacciSquare(1000, 200, Color.orange,1,1));
 		//model.addShape(new FibonacciSquare(400, 50, Color.orange,2,30));
 		//model.addShape(new FibonacciSquare(400, 250, Color.orange,3,120));
-		model.addShape(new FibonacciSquare(600, 600, Color.orange,4,1));
+		model.addShape(new FibonacciSquare(1000, 600, Color.orange,4,1));
 		
 		// ActionListener for the Add Level button
-		buttonAdd.addActionListener(controller);
-		buttonRemove.addActionListener(controller);
+		//buttonAdd.addActionListener(controller);
+		//buttonRemove.addActionListener(controller);
 		buttonReset.addActionListener(controller);
 		frame.addMouseListener(controller);
+		radioAddLevel.addActionListener(controller);
+		radioRemoveLevel.addActionListener(controller);
 		
 		// Setting JFrame Object to visible
 		frame.setVisible(true);

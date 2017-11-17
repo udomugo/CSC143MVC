@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class AbstractShape implements Shape{
 	
@@ -7,6 +8,9 @@ public class AbstractShape implements Shape{
 	protected Color c;
 	protected int x,y;
 	protected Shape[] childrenShapes;
+	protected int nextX;
+	protected int nextY;
+	//protected Point p;
 	
 	/**
 	 * AbstractShape Constructor
@@ -19,15 +23,22 @@ public class AbstractShape implements Shape{
 		this.x = x;
 		this.y = y;
 		this.c = c;
+		//this.p = new Point();
 	}
 
 	@Override
-	public void drawShape(Graphics g, Color c) {
+	public void draw(Graphics g, Color c, int width, int height) {
 		// TODO Auto-generated method stub
-		this.draw(g, c);
+		
+	}
+
+	@Override
+	public void drawShape(Graphics g, Color c, int width, int height) {
+		// TODO Auto-generated method stub
+		this.draw(g, c, width, height);
 		if (this.hasChildren()) {
 			for (Shape s : childrenShapes) {
-				s.drawShape(g, c);
+				s.drawShape(g, c, width, height);
 			}
 		} 
 	}
@@ -36,16 +47,23 @@ public class AbstractShape implements Shape{
 		return "" + this.getClass();
 	}
 	
-	public boolean addLevel() {
+	public boolean addLevel(int width, int height) {
+		
 		if (!this.hasChildren()) {
-			this.createChildren();
+			//if ( (width == 0 && height == 0) || (!(this.nextX < 0 || this.nextX > width) && !(this.nextY < 0 || this.nextY > height)) ) {
+				this.createChildren(width, height);
+//			} else {
+//				System.out.println("Can not draw outside the lines...");
+//				return false;
+//			}
 		} else {
 			for (Shape s : childrenShapes) {
-				if (s.hasChildren()) {
-					s.addLevel();
-				} else {
-					s.createChildren();
-				}
+				//if (s.hasChildren()) {
+				s.addLevel(width, height);
+				//}
+//				else {
+//					s.createChildren(width, height);
+//				}
 			}
 		}
 		return this.hasChildren();
@@ -73,8 +91,8 @@ public class AbstractShape implements Shape{
 		return children;
 	}
 	
-	public boolean createChildren() {
-		return this.createChildren();
+	public boolean createChildren(int width, int height) {
+		return this.createChildren(width, height);
 	}
 
 	public boolean reset() {
@@ -83,28 +101,44 @@ public class AbstractShape implements Shape{
 		}
 		return true;
 	}
-
-	@Override
-	public void draw(Graphics g, Color c) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+//	public boolean checkClick(int xCheck, int yCheck) {
+//		boolean result = false;
+//		if (!this.hasChildren()) {
+//			result = this.checkCoord(xCheck, yCheck);
+//		} else {
+//			for (Shape s : childrenShapes) {
+//				if(s.checkCoord(xCheck, yCheck)) {
+//					result = true;
+//					break;
+//				} else {
+//					result = s.checkClick(xCheck, yCheck);
+//				}
+//			}
+//		}
+//		return result;
+//	}
 	
 	public boolean checkClick(int xCheck, int yCheck) {
 		boolean result = false;
-		if (!this.hasChildren()) {
-			result = this.checkCoord(xCheck, yCheck);
-		} else {
+		if (this.checkCoord(xCheck, yCheck)) {
+			return true;
+		}
+		if (this.hasChildren()) {
 			for (Shape s : childrenShapes) {
-				result = s.checkCoord(xCheck, yCheck);
+				if(s.checkCoord(xCheck, yCheck)) {
+					result = true;
+					break;
+				} else {
+					result = s.checkClick(xCheck, yCheck);
+				}
 			}
 		}
 		return result;
 	}
 
 	@Override
-	public boolean checkCoord(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checkCoord(int xCheck, int yCheck) {
+		return (xCheck < this.nextX && xCheck > this.x) && (yCheck < this.nextY && yCheck > this.y);
 	}
 }
