@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 
 public class AbstractShape implements Shape{
 	
@@ -10,7 +9,6 @@ public class AbstractShape implements Shape{
 	protected Shape[] childrenShapes;
 	protected int nextX;
 	protected int nextY;
-	//protected Point p;
 	
 	/**
 	 * AbstractShape Constructor
@@ -23,7 +21,6 @@ public class AbstractShape implements Shape{
 		this.x = x;
 		this.y = y;
 		this.c = c;
-		//this.p = new Point();
 	}
 
 	@Override
@@ -48,25 +45,15 @@ public class AbstractShape implements Shape{
 	}
 	
 	public boolean addLevel(int width, int height) {
-		
+		boolean result = false;
 		if (!this.hasChildren()) {
-			//if ( (width == 0 && height == 0) || (!(this.nextX < 0 || this.nextX > width) && !(this.nextY < 0 || this.nextY > height)) ) {
-				this.createChildren(width, height);
-//			} else {
-//				System.out.println("Can not draw outside the lines...");
-//				return false;
-//			}
+			result = this.createChildren(width, height);
 		} else {
 			for (Shape s : childrenShapes) {
-				//if (s.hasChildren()) {
-				s.addLevel(width, height);
-				//}
-//				else {
-//					s.createChildren(width, height);
-//				}
+				result = s.addLevel(width, height);
 			}
 		}
-		return this.hasChildren();
+		return result;
 	}
 	
 	public boolean removeLevel() {
@@ -75,10 +62,12 @@ public class AbstractShape implements Shape{
 			for (int i = 0; i < childrenShapes.length; i++) {
 				if (childrenShapes[i].removeLevel()) {
 					childrenShapes[i] = null;
+					return false;
 				}
 			}
 		}
 		return !isParent;
+		//return !isParent;
 	}
 	
 	public boolean hasChildren() {
@@ -101,23 +90,6 @@ public class AbstractShape implements Shape{
 		}
 		return true;
 	}
-	
-//	public boolean checkClick(int xCheck, int yCheck) {
-//		boolean result = false;
-//		if (!this.hasChildren()) {
-//			result = this.checkCoord(xCheck, yCheck);
-//		} else {
-//			for (Shape s : childrenShapes) {
-//				if(s.checkCoord(xCheck, yCheck)) {
-//					result = true;
-//					break;
-//				} else {
-//					result = s.checkClick(xCheck, yCheck);
-//				}
-//			}
-//		}
-//		return result;
-//	}
 	
 	public boolean checkClick(int xCheck, int yCheck) {
 		boolean result = false;

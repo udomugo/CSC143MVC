@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class DrawingModel {
 	
 	private List<Shape> shapes = new ArrayList<Shape>();
-	private ArrayList<Viewer> viewers = new ArrayList<Viewer>();
+	private List<View> views = new ArrayList<View>();
 	
 	/**
 	 * addViewer Method
@@ -12,11 +14,11 @@ public class DrawingModel {
 	 * It then updates the new view with the current model.
 	 * @param v
 	 */
-	public void addViewer(Viewer v) {
+	public void addView(View v) {
 		// Adding a Viewer Object
-		this.viewers.add(v);
+		this.views.add(v);
 		// Calling the Viewer Object to update
-		for (Viewer view : viewers)
+		for (View view : views)
 			view.update(this);
 	}
 	
@@ -30,7 +32,7 @@ public class DrawingModel {
 		// Adding the Shape Object to the ArrayList
 		this.shapes.add(shape);
 		// Calling the Viewer Object to update
-		for (Viewer view : viewers)
+		for (View view : views)
 			view.update(this);
 	}
 	
@@ -47,34 +49,22 @@ public class DrawingModel {
 			copy.add(s);
 		}
 		return copy;
-		
-		// Creating Deep Copy of the ArrayList of Shape Objects
-//		ArrayList<Shape> deepCopy = new ArrayList<Shape>();
-//		for (Shape s : shapes) {
-//			deepCopy.add(s.getDeepCopy());
-//		}
-//		return deepCopy;
 	}
 	
-//	public void addLevel() {
-//		for (Shape s : shapes) {
-//			s.addLevel();
-//		}
-//		for (Viewer view : viewers) {
-//			view.update(this);
-//		}
-//	}
-	
 	public void addLevel(Shape s) {
-		s.addLevel(viewers.get(0).getWidth(), viewers.get(0).getHeight());
-		for (Viewer view : viewers) {
+		if (!s.addLevel(views.get(0).getWidth(), views.get(0).getHeight())) {
+			JOptionPane.showMessageDialog((DrawingView)views.get(0), "Reached Max Level. Can not add any more levels");
+		}
+		for (View view : views) {
 			view.update(this);
 		}
 	}
 	
 	public void removeLevel(Shape s) {
-		s.removeLevel();
-		for (Viewer view : viewers) {
+		if (s.removeLevel()) {
+			JOptionPane.showMessageDialog((DrawingView)views.get(0), "Reached Base Level. Can not remove any more levels");
+		}
+		for (View view : views) {
 			view.update(this);
 		}
 	}
@@ -83,17 +73,8 @@ public class DrawingModel {
 		for (Shape s : shapes) {
 			s.reset();
 		}
-		for (Viewer view : viewers) {
+		for (View view : views) {
 			view.update(this);
 		}
 	}
-	
-//	public boolean checkClick(int xCheck, int yCheck) {
-//		for (Shape s : shapes) {
-//			s.checkClick(xCheck, yCheck);
-//		}
-//		for (Viewer view : viewers) {
-//			view.update(this);
-//		}
-//	}
 }

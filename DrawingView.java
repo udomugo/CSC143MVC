@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-public class Viewer extends JPanel implements View{
+public class DrawingView extends JPanel implements View{
 	
 	private DrawingModel model;
 	//private int width;
@@ -15,7 +15,7 @@ public class Viewer extends JPanel implements View{
 	 * Viewer Constructor
 	 * Creates the Viewer Object and sets the background color.
 	 */
-	public Viewer() {
+	public DrawingView() {
 		// Setting the background color
 		setBackground(Color.darkGray);
 	}
@@ -27,6 +27,7 @@ public class Viewer extends JPanel implements View{
 	 */
 	public void update(DrawingModel model) {
 		this.model = model;
+		//JOptionPane.showMessageDialog(this, "Viewer Updated");
 		//this.width = this.getWidth();
 		//this.height = this.getHeight();
 		//System.out.println(width);

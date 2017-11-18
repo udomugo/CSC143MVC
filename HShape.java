@@ -6,7 +6,6 @@ public class HShape extends AbstractShape{
 	
 	private static int smallestSize;
 	private int size;
-	//private final int SCALE = 30;
 	
 	/**
 	 * HShape Constructor
@@ -55,15 +54,27 @@ public class HShape extends AbstractShape{
 		return result;
 	}
 	
+	public boolean removeLevel() {
+		if (!this.hasChildren()) {
+			smallestSize *= 3;
+			return true;
+		} else {
+			super.removeLevel();
+		}
+		return false;
+	}
+	
 	public boolean createChildren(int width, int height) {
 		boolean result = false;
 		if (smallestSize <= 3){
 			System.out.println("Children Not Created. They would be so tiny!");
+			//JOptionPane.showMessageDialog(null, "Children Not Created. They would be so tiny!");
 		} else {
 			for (int i = 0; i < childrenShapes.length; i++) {
 				Point p = getCoordinates(i);
 				childrenShapes[i] = new HShape( (int)p.getX(), (int)p.getY(), c, size/3);
-				System.out.println("Created HShape Child #" + i);
+				//System.out.println("Created HShape Child #" + i);
+				result = true;
 			}
 		}
 		return result;
@@ -116,5 +127,10 @@ public class HShape extends AbstractShape{
 	
 	public boolean checkClick(int xCheck, int yCheck) {
 		return this.checkCoord(xCheck, yCheck);
+	}
+	
+	public boolean reset() {
+		 smallestSize = this.size;
+		 return super.reset(); 
 	}
 }

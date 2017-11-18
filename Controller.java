@@ -13,11 +13,11 @@ public class Controller implements ActionListener, ComponentListener, MouseListe
 	
 	private boolean level = true;
 	
-	private ArrayList<Viewer> viewers = new ArrayList<Viewer>();
+	private List<View> views = new ArrayList<View>();
 	
-	public Controller(DrawingModel m, Viewer v) {
+	public Controller(DrawingModel m, View v) {
 		this.model = m;
-		this.viewers.add(v);
+		this.views.add(v);
 	}
 
 	@Override
@@ -46,17 +46,8 @@ public class Controller implements ActionListener, ComponentListener, MouseListe
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String action = arg0.getActionCommand();
-		//System.out.println(action);
 		
-//		if (arg0.getActionCommand().equals("Add Level")) {
-//			model.addLevel();
-//			System.out.println("Add Button Pushed");
-//		} else 
-//			if (action.equals("Remove Level")) {
-//			model.removeLevel();
-//			System.out.println("Remove Button Pushed");
-//		} else
+		String action = arg0.getActionCommand();
 		
 		if (action.equals("Reset Shapes")) {
 			model.resetShapes();
@@ -73,7 +64,7 @@ public class Controller implements ActionListener, ComponentListener, MouseListe
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("Click: ( " + (arg0.getX() - 10) + ", " + (arg0.getY() - 38) + " )");
+		//System.out.println("Click: ( " + (arg0.getX() - 10) + ", " + (arg0.getY() - 38) + " )");
 		List<Shape> shapes = model.getShapes(); 
 		for (int i = 0; i < shapes.size(); i++) {
 			if(shapes.get(i).checkClick(arg0.getX()-10, arg0.getY()-38)) {
@@ -83,9 +74,10 @@ public class Controller implements ActionListener, ComponentListener, MouseListe
 					model.removeLevel(shapes.get(i));
 				}
 				
-			} else {
-				System.out.println("Click not on Shape");
-			}	
+			}
+//			else {
+//				System.out.println("Click not on Shape");
+//			}	
 		}
 		
 	}

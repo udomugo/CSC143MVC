@@ -54,14 +54,18 @@ public class MainClass {
 		
 		
 		// Adding a viewer object to the frame
-		Viewer v = new Viewer();
+		DrawingView v = new DrawingView();
 		frame.add(v);
 		
 		// Adding the Drawing Model
 		DrawingModel model = new DrawingModel();
 		
 		// Adding the Viewer Object to the Model Object
-		model.addViewer(v);
+		model.addView(v);
+		
+		// Adding the TextViewer Object to the Model Object
+		TextView t = new TextView();
+		model.addView(t);
 		
 		// Adding the DrawingModel and Viewer Objects to the Controller Object
 		Controller controller = new Controller(model, v);
