@@ -9,6 +9,7 @@ public class AbstractShape implements Shape{
 	protected Shape[] childrenShapes;
 	protected int nextX;
 	protected int nextY;
+	protected static int level=0;
 	
 	/**
 	 * AbstractShape Constructor
@@ -41,13 +42,16 @@ public class AbstractShape implements Shape{
 	}
 	
 	public String toString() {
-		return "" + this.getClass();
+		return "" + this.getClass() + "Level: " + level;
 	}
 	
 	public boolean addLevel(int width, int height) {
 		boolean result = false;
 		if (!this.hasChildren()) {
 			result = this.createChildren(width, height);
+			if(result) {
+				level++;
+			}
 		} else {
 			for (Shape s : childrenShapes) {
 				result = s.addLevel(width, height);
